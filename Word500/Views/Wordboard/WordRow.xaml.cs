@@ -49,6 +49,13 @@ public partial class WordRow : ContentView
             letterTile.shakeNo();
         }
     }
+
+    internal void MarkEvaluation(int correct, int present, int wrong)
+    {
+        scoreTiles[0].MarkState = LetterTile.MarkStates.Green;
+
+    }
+
     private void OnTileSizeChanged(object? sender, EventArgs e)
     {
         var tile = (LetterTile)sender!;

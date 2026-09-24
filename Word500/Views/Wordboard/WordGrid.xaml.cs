@@ -102,5 +102,9 @@ public partial class WordGrid : ContentView
         {
             wordRows[currentRow].shakeNo();
         }
+        else
+        {
+            wordRows[currentRow].MarkEvaluation(countCorrect(UserWord, Word), countPresent(UserWord, Word), countWrong(UserWord, Word));
+        }
     }
 }
