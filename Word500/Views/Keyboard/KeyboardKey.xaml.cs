@@ -1,3 +1,4 @@
+using static Word500.Keyboard;
 using static Word500.LetterTile;
 
 namespace Word500;
@@ -20,10 +21,8 @@ public partial class KeyboardKey : ContentView
             tileBorder.Stroke = null;
         }
         thisChar = chr;
-	}
-    public class KeyPressedEventArgs :EventArgs { public string Key { get; set; } }
-    public delegate void OnPressed(object sender, KeyPressedEventArgs e);
-    public event OnPressed KeyPressed;
+    }
+    public event KeyPressedHandler KeyPressed;
     protected override void OnHandlerChanged()
     {
         void handler(object s, object e)
@@ -94,9 +93,9 @@ public partial class KeyboardKey : ContentView
 
         if (elapsed < HoldThreshold)
         {
+            KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Key = this.thisChar });
             await tileBorder.ScaleToAsync(1.1, 100);
             await tileBorder.ScaleToAsync(1, 100);
-            KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Key = this.thisChar });
         }
         else
         {

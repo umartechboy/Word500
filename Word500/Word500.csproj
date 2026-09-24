@@ -71,28 +71,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="LetterTile.xaml.cs">
+	  <Compile Update="Views\Keyboard\FunctionKey.xaml.cs">
+	    <DependentUpon>FunctionKey.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Wordboard\LetterTile.xaml.cs">
 	    <DependentUpon>LetterTile.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Keyboard.xaml">
+	  <MauiXaml Update="Views\Keyboard\Keyboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="KeyboardKey.xaml">
+	  <MauiXaml Update="Views\Keyboard\FunctionKey.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="KeyboardRow.xaml">
+	  <MauiXaml Update="Views\Keyboard\KeyboardKey.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LetterTile.xaml">
+	  <MauiXaml Update="Views\Keyboard\KeyboardRow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="WordGrid.xaml">
+	  <MauiXaml Update="Views\Wordboard\LetterTile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="WordRow.xaml">
+	  <MauiXaml Update="Views\Wordboard\WordGrid.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Wordboard\WordRow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

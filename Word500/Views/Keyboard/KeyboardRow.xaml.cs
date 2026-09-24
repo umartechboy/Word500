@@ -1,10 +1,11 @@
+using static Word500.Keyboard;
 using static Word500.KeyboardKey;
 
 namespace Word500;
 
 public partial class KeyboardRow : ContentView
 {
-    public event OnPressed KeyPressed;
+    public event KeyPressedHandler KeyPressed;
     public KeyboardRow(string keys)
     {
         InitializeComponent();

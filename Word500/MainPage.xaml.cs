@@ -12,15 +12,20 @@
             {
                 if (e.Key == "space")
                     wordBoard.appendLetter('_');
-                else if (e.Key == "backspace")
+                else if (e.Function == FunctionKey.KeyFunction.BackSpace)
                     wordBoard.appendLetter('\b');
-                else if (e.Key == "reset")
+                else if (e.Function == FunctionKey.KeyFunction.BackSpaceFullLine)
+                {
+                    for (int i = 0; i < wordBoard.WordLength; i++)
+                        wordBoard.appendLetter('\b');
+                }
+                else if (e.Function == FunctionKey.KeyFunction.Clear)
                 {
                 }
-                else if (e.Key == "hard reset")
+                else if (e.Function == FunctionKey.KeyFunction.HardClear)
                 {
                 }
-                else if (e.Key == "submit")
+                else if (e.Function == FunctionKey.KeyFunction.Submit)
                 {
                 }
                 else if (e.Key.Length == 1)

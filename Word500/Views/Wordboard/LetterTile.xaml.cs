@@ -65,12 +65,12 @@ public partial class LetterTile : ContentView
 		hasReleased = true;
 
         if (elapsed < HoldThreshold)
-		{
-			await tileBorder.ScaleToAsync(1.1, 100);
-            await tileBorder.ScaleToAsync(1, 100);
+        {
             MarkState++;
-			if (MarkState > MarkStates.Green)
-				MarkState = MarkStates.Null;
+            if (MarkState > MarkStates.Green)
+                MarkState = MarkStates.Null;
+            await tileBorder.ScaleToAsync(1.1, 100);
+            await tileBorder.ScaleToAsync(1, 100);
 			Tapped?.Invoke(this, EventArgs.Empty);
 		}
 		else
