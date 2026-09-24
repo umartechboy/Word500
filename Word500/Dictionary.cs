@@ -11,7 +11,7 @@ public static class Dictionary
 
         using var stream = FileSystem.OpenAppPackageFileAsync("dictionary.txt").Result;
         using var reader = new StreamReader(stream);
-        var text = reader.ReadToEnd();
+        var text = reader.ReadToEnd().ToUpper();
         _words = text.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         return _words;
     }

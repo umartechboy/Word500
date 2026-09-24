@@ -5,9 +5,6 @@ namespace Word500;
 
 public partial class FunctionKey : ContentView
 {
-    Border tileBorder;
-    Image icon;
-
     KeyFunction _function;
     public KeyFunction Function
     {
@@ -31,13 +28,12 @@ public partial class FunctionKey : ContentView
         BackSpace,
         None,
         HardClear,
-        BackSpaceFullLine
+        BackSpaceFullLine,
+        ForceSubmit
     }
     public FunctionKey()
     {
         InitializeComponent();
-        tileBorder = (Border)Content;
-        icon = (Image)tileBorder.Content;
         Function = _function;
     }
     public event KeyPressedHandler KeyPressed;
@@ -64,6 +60,12 @@ public partial class FunctionKey : ContentView
 
             if (hasReleased)
                 return; 
+            if (Function == KeyFunction.Clear)
+                KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = KeyFunction.BackSpaceFullLine });
+            else if (Function == KeyFunction.Clear)
+                KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = KeyFunction.HardClear });
+            else if (Function == KeyFunction.Submit)
+                KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = KeyFunction.ForceSubmit });
             var elapsed = DateTime.UtcNow - pressStart;
             if (elapsed.TotalMilliseconds > HoldThreshold.TotalMilliseconds - 50) // it was a hold
             {
@@ -85,9 +87,9 @@ public partial class FunctionKey : ContentView
 
         if (elapsed < HoldThreshold)
         {
+            KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = this.Function });
             await tileBorder.ScaleToAsync(1.1, 100);
             await tileBorder.ScaleToAsync(1, 100);
-            KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = this.Function });
         }
         else
         {

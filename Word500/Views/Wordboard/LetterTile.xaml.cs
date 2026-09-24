@@ -7,7 +7,7 @@ public partial class LetterTile : ContentView
 		InitializeComponent();
 	}
 	private MarkStates markState;
-	public MarkStates MarkState
+	public MarkStates TestState
 	{
 		get => markState;
 		set
@@ -22,8 +22,8 @@ public partial class LetterTile : ContentView
 			};
 		}
 	}
-	public event EventHandler? Tapped;
-	public event EventHandler? Held;
+	public event EventHandler? TestStateChanged;
+	public event EventHandler? Locked;
 
 	private DateTime pressStart;
 	private static readonly TimeSpan HoldThreshold = TimeSpan.FromSeconds(0.7);
@@ -49,7 +49,7 @@ public partial class LetterTile : ContentView
 			{
                 await tileBorder.ScaleToAsync(1.1, 200);
                 await tileBorder.ScaleToAsync(1, 100);
-                Held?.Invoke(this, EventArgs.Empty);
+                Locked?.Invoke(this, EventArgs.Empty);
 
             }
 		}).Start();
@@ -66,12 +66,12 @@ public partial class LetterTile : ContentView
 
         if (elapsed < HoldThreshold)
         {
-            MarkState++;
-            if (MarkState > MarkStates.Green)
-                MarkState = MarkStates.Null;
+            TestState++;
+            if (TestState > MarkStates.Green)
+                TestState = MarkStates.Null;
             await tileBorder.ScaleToAsync(1.1, 100);
             await tileBorder.ScaleToAsync(1, 100);
-			Tapped?.Invoke(this, EventArgs.Empty);
+			TestStateChanged?.Invoke(this, EventArgs.Empty);
 		}
 		else
 		{

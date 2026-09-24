@@ -8,6 +8,7 @@
         public MainPage(int wordCount)
         {
             InitializeComponent();
+            wordBoard.TestStateChanged += WordBoard_TestStateChanged;
             keyboard.KeyPressed += (s, e) =>
             {
                 if (e.Key == "space")
@@ -21,6 +22,7 @@
                 }
                 else if (e.Function == FunctionKey.KeyFunction.Clear)
                 {
+                    wordBoard.HighlightWrong();
                 }
                 else if (e.Function == FunctionKey.KeyFunction.HardClear)
                 {
@@ -29,8 +31,17 @@
                 {
                     wordBoard.EvaluateCurrent();
                 }
+                else if (e.Function == FunctionKey.KeyFunction.ForceSubmit)
+                {
+                    // This needs to be invoked in the UI thread
+                    MainThread.BeginInvokeOnMainThread(() => { wordBoard.EvaluateCurrent(true); });
+
+                }
                 else if (e.Key.Length == 1)
+                {
                     wordBoard.appendLetter(e.Key[0]);
+                    keyboard[e.Key[0]].IsUsed = true;
+                }
 
 
             };
@@ -38,6 +49,10 @@
 
             wordBoard.Word = "orbit";
             wordBoard.RetriesCount = 6;
+        }
+
+        private void WordBoard_TestStateChanged(object? sender, EventArgs e)
+        {
         }
     }
 }

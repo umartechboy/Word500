@@ -5,7 +5,7 @@ namespace Word500;
 
 public partial class KeyboardKey : ContentView
 {
-    string thisChar = "";
+    public string Character { get; private set; } = "";
 	public KeyboardKey(string chr)
 	{
 		InitializeComponent();
@@ -20,7 +20,7 @@ public partial class KeyboardKey : ContentView
         {
             tileBorder.Stroke = null;
         }
-        thisChar = chr;
+        Character = chr;
     }
     public event KeyPressedHandler KeyPressed;
     protected override void OnHandlerChanged()
@@ -29,10 +29,10 @@ public partial class KeyboardKey : ContentView
         { 
             this.WidthRequest = this.Window.Width / 13;
             this.Window.SizeChanged += (s, e) => handler(s, e);
-            if (this.thisChar == "\t")
+            if (this.Character == "\t")
                 this.WidthRequest /= 2;
             this.HeightRequest = this.WidthRequest;
-            if (this.thisChar == " ")
+            if (this.Character == " ")
                 this.WidthRequest *= 5;
         }
         handler(null, null);
@@ -49,7 +49,7 @@ public partial class KeyboardKey : ContentView
     {
         get => _isused; set
         {
-            if (thisChar != "" && thisChar != " " && thisChar != "reset" && thisChar != "hard reset" && thisChar != "backspace")
+            if (Character != "" && Character != " " && Character != "reset" && Character != "hard reset" && Character != "backspace")
             {
                 _isused = value;
                 tileBorder.Opacity = value ? 0.3 : 1.0;
@@ -59,7 +59,7 @@ public partial class KeyboardKey : ContentView
     bool hasReleased = true;
     private void PointerGestureRecognizer_PointerPressed(object sender, PointerEventArgs e)
     {
-        if (thisChar == "\t")
+        if (Character == "\t")
             return;
         hasReleased = false;
         pressStart = DateTime.UtcNow;
@@ -86,14 +86,14 @@ public partial class KeyboardKey : ContentView
 
     private async void PointerGestureRecognizer_PointerReleased(object sender, PointerEventArgs e)
     {
-        if(thisChar == "\t") return;
+        if(Character == "\t") return;
         tileBorder.CancelAnimations();
         hasReleased = true;
         var elapsed = DateTime.UtcNow - pressStart;
 
         if (elapsed < HoldThreshold)
         {
-            KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Key = this.thisChar });
+            KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Key = this.Character });
             await tileBorder.ScaleToAsync(1.1, 100);
             await tileBorder.ScaleToAsync(1, 100);
         }

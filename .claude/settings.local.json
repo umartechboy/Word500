@@ -6,7 +6,8 @@
       "Bash(git commit *)",
       "Bash(gh auth *)",
       "Bash(ssh -T git@github.com)",
-      "Bash(git remote *)"
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }

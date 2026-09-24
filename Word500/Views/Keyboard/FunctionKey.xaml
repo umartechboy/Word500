@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Word500.FunctionKey">
 
-    <Border HorizontalOptions="Fill">
+    <Border x:Name="tileBorder" HorizontalOptions="Fill" BackgroundColor="Transparent">
         <Border.GestureRecognizers>
             <PointerGestureRecognizer PointerPressed="PointerGestureRecognizer_PointerPressed"  PointerReleased="PointerGestureRecognizer_PointerReleased" />
         </Border.GestureRecognizers>
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="5"></RoundRectangle>
         </Border.StrokeShape>
-        <Image HorizontalOptions="Center" VerticalOptions="Center"
-               WidthRequest="24" HeightRequest="24" />
+        <Image x:Name="icon" HorizontalOptions="Center" VerticalOptions="Center"
+               WidthRequest="24" HeightRequest="24" InputTransparent="True" />
     </Border>
 </ContentView>
