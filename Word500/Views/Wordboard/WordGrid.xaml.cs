@@ -26,6 +26,7 @@ public partial class WordGrid : ContentView
 
     string _word;
     public string Word { get => _word; set { _word = value; WordLength = value.Length; } }
+    public string UserWord { get { return wordRows[currentRow].WordEntered; } }
 
     void resetViews()
     {
@@ -71,9 +72,29 @@ public partial class WordGrid : ContentView
         currentLetter++;
     }
 
-    int countCorrect(string user, correct)
+    static int countCorrect(string user, string correct)
     {
-
+        int c = 0;
+        for (int i = 0; i < user.Length; i++)
+        {
+            if (user[i] == correct[i])
+                c++;
+        }
+        return c;
+    }
+    static int countPresent(string user, string correct)
+    {
+        int c = 0;
+        for (int i = 0; i < user.Length; i++)
+        {
+            if (correct.Contains(user[i]) && correct[i] != user[i])
+                c++;
+        }
+        return c;
+    }
+    static int countWrong(string user, string correct)
+    {
+        return correct.Length - countCorrect(user, correct) - countPresent(user, correct);
     }
     internal void EvaluateCurrent()
     {

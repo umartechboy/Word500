@@ -1,4 +1,5 @@
 namespace Word500;
+using System.Linq;
 
 public partial class WordRow : ContentView
 {
@@ -34,6 +35,8 @@ public partial class WordRow : ContentView
             tileGrid.Add(scoreTiles[i], wordCount + i, 0);
         }
     }
+
+    public string WordEntered { get { return string.Join("", letterTiles.Select(t => t.Label)); } }
 
     public void setLetter(char chr, int currentLetter)
     {

@@ -83,7 +83,7 @@ public partial class LetterTile : ContentView
 	{
         tileBorder.TranslateToAsync(5, 0, 50).ContinueWith((b) =>
         {
-            tileBorder.TranslateToAsync(-5, 0, 350).ContinueWith((b) =>
+            tileBorder.TranslateToAsync(-5, 0, 50).ContinueWith((b) =>
             {
                 tileBorder.TranslateToAsync(5, 0, 50).ContinueWith((b) =>
                 {
