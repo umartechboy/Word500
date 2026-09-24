@@ -71,6 +71,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="GamePage.xaml.cs">
+	    <DependentUpon>GamePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Keyboard\FunctionKey.xaml.cs">
 	    <DependentUpon>FunctionKey.xaml</DependentUpon>
 	  </Compile>
@@ -80,7 +83,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="MainPage.xaml">
+	  <MauiXaml Update="GamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Keyboard\Keyboard.xaml">

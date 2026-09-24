@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Word500"
-             x:Class="Word500.MainPage">
+             x:Class="Word500.GamePage">
 
     <VerticalStackLayout x:Name="lWordGrid" HorizontalOptions="Fill" VerticalOptions="Center"
                          MaximumWidthRequest="600" Margin="20,0">

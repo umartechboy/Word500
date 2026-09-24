@@ -44,7 +44,9 @@ public partial class FunctionKey : ContentView
     protected override void OnHandlerChanged()
     {
         void handler(object s, object e)
-        { 
+        {
+            if (this.Window == null)
+                return;
             this.HeightRequest = this.Window.Width / 13;
         }
         handler(null, null);

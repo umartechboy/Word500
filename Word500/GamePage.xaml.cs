@@ -1,11 +1,29 @@
 ﻿namespace Word500
 {
-    public partial class MainPage : ContentPage
+    [QueryProperty(nameof(Letters), "letters")]
+    [QueryProperty(nameof(Chances), "chances")]
+    public partial class GamePage : ContentPage
     {
-        public MainPage() : this(8)
+        private int _letters = 5;
+        private int _chances = 8;
+
+        public string Letters
         {
+            set { if (int.TryParse(value, out var v)) _letters = v; ApplySettings(); }
         }
-        public MainPage(int wordCount)
+
+        public string Chances
+        {
+            set { if (int.TryParse(value, out var v)) _chances = v; ApplySettings(); }
+        }
+
+        private void ApplySettings()
+        {
+            wordBoard.WordLength = _letters;
+            wordBoard.RetriesCount = _chances;
+        }
+
+        public GamePage()
         {
             InitializeComponent();
             wordBoard.TestStateChanged += WordBoard_TestStateChanged;
@@ -64,10 +82,6 @@
 
 
             };
-            // var words = Dictionary.GetWords()
-
-            wordBoard.Word = "orbit";
-            wordBoard.RetriesCount = 6;
         }
 
         private void WordBoard_TestStateChanged(object? sender, EventArgs e)

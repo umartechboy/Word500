@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Word500.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource White}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0" VerticalOptions="Center"
+                             MaximumWidthRequest="480" HorizontalOptions="Center"
+                             Padding="30,40">
+
+            <!-- Title -->
+            <Label Text="WORD"
+                   FontSize="42" FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Primary}"
+                   Margin="0,0,0,-8" />
+            <Label Text="500"
+                   FontSize="56" FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Tertiary}"
+                   Margin="0,0,0,8" />
+            <BoxView HeightRequest="3" WidthRequest="60"
+                     Color="{StaticResource Primary}"
+                     HorizontalOptions="Center"
+                     Margin="0,0,0,32" CornerRadius="2" />
+            <Label Text="How fast can you crack it?"
+                   FontSize="15"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Gray400}"
+                   Margin="0,0,0,36" />
+
+            <!-- Menu Cards -->
+
+            <!-- Practice -->
+            <Border Stroke="{StaticResource Gray100}" StrokeThickness="1"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="16" Margin="0,0,0,12"
+                    HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnPracticeTapped" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="52,*,Auto" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="52" HeightRequest="52"
+                            StrokeThickness="0" BackgroundColor="#EDE7FB">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Image Source="icon_practice.png" WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="Practice" FontSize="17" FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}" />
+                        <Label Text="Practice with a random word"
+                               FontSize="13" TextColor="{StaticResource Gray400}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="&#x203A;" FontSize="24"
+                           TextColor="{StaticResource Gray300}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Logic Testing -->
+            <Border Stroke="{StaticResource Gray100}" StrokeThickness="1"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="16" Margin="0,0,0,12"
+                    HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLogicTestTapped" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="52,*,Auto" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="52" HeightRequest="52"
+                            StrokeThickness="0" BackgroundColor="#E8E0F7">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Image Source="icon_logic.png" WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="Logic Testing" FontSize="17" FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}" />
+                        <Label Text="Test logic with a known word"
+                               FontSize="13" TextColor="{StaticResource Gray400}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="&#x203A;" FontSize="24"
+                           TextColor="{StaticResource Gray300}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Game of the Day -->
+            <Border Stroke="{StaticResource Gray100}" StrokeThickness="1"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="16" Margin="0,0,0,12"
+                    HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnDailyTapped" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="52,*,Auto" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="52" HeightRequest="52"
+                            StrokeThickness="0" BackgroundColor="#FCE4F3">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Image Source="icon_daily.png" WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="Game of the Day" FontSize="17" FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}" />
+                        <Label Text="Play what hundreds are playing today"
+                               FontSize="13" TextColor="{StaticResource Gray400}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="&#x203A;" FontSize="24"
+                           TextColor="{StaticResource Gray300}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Challenge a Friend -->
+            <Border Stroke="{StaticResource Gray100}" StrokeThickness="1"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="16" Margin="0,0,0,12"
+                    HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnChallengeTapped" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="52,*,Auto" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="52" HeightRequest="52"
+                            StrokeThickness="0" BackgroundColor="#FDF0DC">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Image Source="icon_challenge.png" WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="Challenge a Friend" FontSize="17" FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}" />
+                        <Label Text="Set rules and challenge a friend"
+                               FontSize="13" TextColor="{StaticResource Gray400}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="&#x203A;" FontSize="24"
+                           TextColor="{StaticResource Gray300}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Help -->
+            <Border Stroke="{StaticResource Gray100}" StrokeThickness="1"
+                    BackgroundColor="{StaticResource White}"
+                    Padding="16" Margin="0,0,0,12"
+                    HorizontalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHelpTapped" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="52,*,Auto" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="52" HeightRequest="52"
+                            StrokeThickness="0" BackgroundColor="#DBEEFE">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Image Source="icon_help.png" WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="How to Play" FontSize="17" FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}" />
+                        <Label Text="Learn the rules and scoring"
+                               FontSize="13" TextColor="{StaticResource Gray400}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="&#x203A;" FontSize="24"
+                           TextColor="{StaticResource Gray300}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -26,7 +26,9 @@ public partial class KeyboardKey : ContentView
     protected override void OnHandlerChanged()
     {
         void handler(object s, object e)
-        { 
+        {
+            if (this.Window == null)
+                return;
             this.WidthRequest = this.Window.Width / 13;
             this.Window.SizeChanged += (s, e) => handler(s, e);
             if (this.Character == "\t")

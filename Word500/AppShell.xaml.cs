@@ -5,6 +5,8 @@
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute("game", typeof(GamePage));
+            Routing.RegisterRoute("difficulty", typeof(DifficultyPage));
         }
     }
 }
