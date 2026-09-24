@@ -2,7 +2,7 @@ namespace Word500;
 
 public partial class WordRow : ContentView
 {
-    LetterTile[] letterTiles;
+    public LetterTile[] letterTiles;
     LetterTile[] scoreTiles;
     public WordRow():this(5)
 	{
@@ -22,18 +22,36 @@ public partial class WordRow : ContentView
         {
             letterTiles[i] = new LetterTile { HorizontalOptions = LayoutOptions.Fill };
             letterTiles[i].SizeChanged += OnTileSizeChanged;
-            tileGrid.Add(letterTiles[i], i, 0);
             letterTiles[i].Margin = new Thickness(0, 0, this.Margin.Bottom, 0);
+            tileGrid.Add(letterTiles[i], i, 0);
         }
         for (int i = 0; i < scoreTiles.Length; i++)
         {
             scoreTiles[i] = new LetterTile { DisableClick = true, HorizontalOptions = LayoutOptions.Fill };
             scoreTiles[i].SizeChanged += OnTileSizeChanged;
-            tileGrid.Add(scoreTiles[i], wordCount + i, 0);
             scoreTiles[i].Margin = new Thickness(this.Margin.Bottom, 0, 0, 0);
+            tileGrid.Add(scoreTiles[i], wordCount + i, 0);
         }
     }
 
+    int currentLetter = 0;
+    public void appendLetter(char chr)
+    {
+        if (chr == '\b')
+        {
+            if (currentLetter <= 0)
+                return;
+            currentLetter--;
+            letterTiles[currentLetter].Label = "";
+            return;
+        }
+        if (currentLetter >= letterTiles.Length)
+        {
+            return;
+        }
+        letterTiles[currentLetter].Label = chr.ToString();
+        currentLetter++;
+    }
     private void OnTileSizeChanged(object? sender, EventArgs e)
     {
         var tile = (LetterTile)sender!;

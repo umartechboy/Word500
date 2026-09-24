@@ -2,19 +2,30 @@
 {
     public partial class MainPage : ContentPage
     {
-        WordRow[] wordRows;
         public MainPage() : this(8)
         {
         }
-public MainPage(int wordCount)
+        public MainPage(int wordCount)
         {
             InitializeComponent();
-            wordRows = new WordRow[wordCount];
-            for (int i = 0; i < wordRows.Length; i++)
+            keyboard.KeyPressed += (s, e) =>
             {
-                wordRows[i] = new WordRow();
-                lWordGrid.Children.Add(wordRows[i]);
-            }
+                if (e.Key == "space")
+                    wordBoard.appendLetter('_');
+                else if (e.Key == "backspace")
+                    wordBoard.appendLetter('\b');
+                else if (e.Key == "reset")
+                {
+                }
+                else if (e.Key == "hard reset")
+                {
+                }
+                else if (e.Key == "submit")
+                {
+                }
+                else if (e.Key.Length == 1)
+                    wordBoard.appendLetter(e.Key[0]);
+            };
         }
     }
 }

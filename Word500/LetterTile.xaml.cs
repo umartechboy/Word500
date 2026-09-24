@@ -26,20 +26,26 @@ public partial class LetterTile : ContentView
 	public event EventHandler? Held;
 
 	private DateTime pressStart;
-	private static readonly TimeSpan HoldThreshold = TimeSpan.FromSeconds(1);
+	private static readonly TimeSpan HoldThreshold = TimeSpan.FromSeconds(0.7);
 	bool hasReleased = true;
 
 	private void OnPointerPressed(object? sender, PointerEventArgs e)
 	{
 		if (DisableClick) return;
-		pressStart = DateTime.UtcNow;
+		if (string.IsNullOrEmpty(label.Text))
+			return;
+		hasReleased = false;
+        pressStart = DateTime.UtcNow;
 		tileBorder.CancelAnimations();
-		tileBorder.ScaleToAsync(0.7, 1000);
+		tileBorder.ScaleToAsync(0.7, (uint)HoldThreshold.TotalMilliseconds);
 		new Task(async () =>
 		{
-			await Task.Delay(1000);
-            var elapsed = DateTime.UtcNow - pressStart;
-            if (elapsed.TotalMilliseconds > 950) // it was a hold
+			await Task.Delay((int)HoldThreshold.TotalMilliseconds);
+
+            if (hasReleased)
+                return;
+			var elapsed = DateTime.UtcNow - pressStart;
+            if (elapsed.TotalMilliseconds > HoldThreshold.TotalMilliseconds - 50) // it was a hold
 			{
                 await tileBorder.ScaleToAsync(1.1, 200);
                 await tileBorder.ScaleToAsync(1, 100);
@@ -52,10 +58,13 @@ public partial class LetterTile : ContentView
 	private async void OnPointerReleased(object? sender, PointerEventArgs e)
 	{
 		if (DisableClick) return;
-		tileBorder.CancelAnimations();
+        if (string.IsNullOrEmpty(label.Text))
+            return;
+        tileBorder.CancelAnimations();
 		var elapsed = DateTime.UtcNow - pressStart;
+		hasReleased = true;
 
-		if (elapsed < HoldThreshold)
+        if (elapsed < HoldThreshold)
 		{
 			await tileBorder.ScaleToAsync(1.1, 100);
             await tileBorder.ScaleToAsync(1, 100);
