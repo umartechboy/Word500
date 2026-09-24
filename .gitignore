@@ -1,0 +1,8 @@
+## .NET / MAUI
+bin/
+obj/
+*.user
+*.suo
+
+## Visual Studio
+.vs/
