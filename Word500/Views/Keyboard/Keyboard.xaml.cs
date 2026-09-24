@@ -29,6 +29,7 @@ public partial class Keyboard : ContentView
 		bBackspace.KeyPressed += (s,e) => KeyPressed?.Invoke(s, e);
 		bSubmit.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
 		bClear.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
+		bSquibler.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
     }
 	public KeyboardKey this[char chr]
 	{

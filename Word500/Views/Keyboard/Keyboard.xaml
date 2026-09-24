@@ -5,10 +5,11 @@
              xmlns:local="clr-namespace:Word500">
     <VerticalStackLayout x:Name="lRowGrid" HorizontalOptions="Fill" VerticalOptions="Center"
                          MaximumWidthRequest="600" Margin="20,0">
-        <Grid HorizontalOptions="Fill" ColumnDefinitions="*,*,*" Margin="0,8,0,8">
+        <Grid HorizontalOptions="Fill" ColumnDefinitions="*,*,*,*" Margin="0,8,0,8">
             <local:FunctionKey x:Name="bClear" Grid.Column="0" Margin="5,0" Function="Clear"></local:FunctionKey>
             <local:FunctionKey x:Name="bSubmit" Grid.Column="1" Margin="5,0" Function="Submit"></local:FunctionKey>
-            <local:FunctionKey x:Name="bBackspace" Grid.Column="2" Margin="5,0" Function="BackSpace"></local:FunctionKey>            
+            <local:FunctionKey x:Name="bSquibler" Grid.Column="2" Margin="5,0" Function="Squible"></local:FunctionKey>
+            <local:FunctionKey x:Name="bBackspace" Grid.Column="3" Margin="5,0" Function="BackSpace"></local:FunctionKey>
         </Grid>
 
     </VerticalStackLayout>

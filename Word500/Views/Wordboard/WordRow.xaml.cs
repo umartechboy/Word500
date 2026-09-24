@@ -43,7 +43,20 @@ public partial class WordRow : ContentView
         }
     }
 
-    public string WordEntered { get { return string.Join("", letterTiles.Select(t => t.Label)); } }
+    public string WordEntered
+    {
+        get { return string.Join("", letterTiles.Select(t => t.Label)); }
+        set
+        {
+            for (int i = 0; i < letterTiles.Length; i++)
+            {
+                if (i < value.Length)
+                    letterTiles[i].Label = value[i].ToString();
+                else
+                    letterTiles[i].Label = "";
+            }
+        }
+    }
 
     public void setLetter(char chr, int currentLetter)
     {

@@ -57,8 +57,10 @@ public partial class WordGrid : ContentView
     }
     int currentRow = 0;
     int currentLetter = 0;
+    string lastWordForSquible = null;
     public void appendLetter(char chr)
     {
+        lastWordForSquible = null;
         if (currentRow >= wordRows.Length)
             return;
         //if (UserWord.Contains(chr)) 
@@ -154,6 +156,34 @@ public partial class WordGrid : ContentView
                     MarkTestState(c.ToString(), LetterTile.MarkStates.Red);
                 }
             }
+        }
+    }
+
+    internal void ClearAllTests()
+    {
+        foreach (var row in wordRows)
+        {
+            foreach (var c in row.WordEntered)
+            {
+                MarkTestState(c.ToString(), LetterTile.MarkStates.Null);
+            }
+        }
+    }
+
+    internal void squibleCurrent(bool hard)
+    {
+        string UserWord = this.UserWord;
+        if (lastWordForSquible != null)
+            UserWord = lastWordForSquible;
+        else
+            lastWordForSquible = this.UserWord;
+        var newWord = Dictionary.Squible(UserWord, Word, hard);
+        if (newWord == UserWord)
+            wordRows[currentRow].shakeNo();
+        else
+        {
+            wordRows[currentRow].WordEntered = newWord;
+            currentLetter = newWord.Length;
         }
     }
 }

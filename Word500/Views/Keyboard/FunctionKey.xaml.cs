@@ -18,6 +18,8 @@ public partial class FunctionKey : ContentView
                 icon.Source = "backspace_icon.png";
             if (value == KeyFunction.Clear)
                 icon.Source = "clear.png";
+            if (value == KeyFunction.Squible)
+                icon.Source = "squible.png";
         }
     }
 
@@ -29,7 +31,9 @@ public partial class FunctionKey : ContentView
         None,
         HardClear,
         BackSpaceFullLine,
-        ForceSubmit
+        ForceSubmit,
+        Squible,
+        HardSquible
     }
     public FunctionKey()
     {
@@ -60,12 +64,14 @@ public partial class FunctionKey : ContentView
 
             if (hasReleased)
                 return; 
-            if (Function == KeyFunction.Clear)
+            if (Function == KeyFunction.BackSpace)
                 KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = KeyFunction.BackSpaceFullLine });
             else if (Function == KeyFunction.Clear)
                 KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = KeyFunction.HardClear });
             else if (Function == KeyFunction.Submit)
                 KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = KeyFunction.ForceSubmit });
+            else if (Function == KeyFunction.Squible)
+                KeyPressed?.Invoke(this, new KeyPressedEventArgs() { Function = KeyFunction.HardSquible });
             var elapsed = DateTime.UtcNow - pressStart;
             if (elapsed.TotalMilliseconds > HoldThreshold.TotalMilliseconds - 50) // it was a hold
             {

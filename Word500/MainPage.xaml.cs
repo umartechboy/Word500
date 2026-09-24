@@ -17,15 +17,34 @@
                     wordBoard.appendLetter('\b');
                 else if (e.Function == FunctionKey.KeyFunction.BackSpaceFullLine)
                 {
-                    for (int i = 0; i < wordBoard.WordLength; i++)
-                        wordBoard.appendLetter('\b');
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        for (int i = 0; i < wordBoard.WordLength; i++)
+                            wordBoard.appendLetter('\b');
+                    });
                 }
                 else if (e.Function == FunctionKey.KeyFunction.Clear)
                 {
                     wordBoard.HighlightWrong();
                 }
+                else if (e.Function == FunctionKey.KeyFunction.Squible)
+                {
+                    wordBoard.squibleCurrent(false);
+                }
+                else if (e.Function == FunctionKey.KeyFunction.HardSquible)
+                {
+
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        wordBoard.squibleCurrent(true);
+                    });
+                }
                 else if (e.Function == FunctionKey.KeyFunction.HardClear)
                 {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        wordBoard.ClearAllTests();
+                    });
                 }
                 else if (e.Function == FunctionKey.KeyFunction.Submit)
                 {
