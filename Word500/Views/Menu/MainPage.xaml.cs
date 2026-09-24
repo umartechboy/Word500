@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
 
     private async void OnLogicTestTapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("game");
+        await Shell.Current.GoToAsync("customgame");
     }
 
     private async void OnDailyTapped(object sender, TappedEventArgs e)
@@ -29,5 +29,6 @@ public partial class MainPage : ContentPage
 
     private async void OnHelpTapped(object sender, TappedEventArgs e)
     {
+        await Shell.Current.GoToAsync("help");
     }
 }

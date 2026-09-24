@@ -2,10 +2,12 @@
 {
     [QueryProperty(nameof(Letters), "letters")]
     [QueryProperty(nameof(Chances), "chances")]
+    [QueryProperty(nameof(Word), "word")]
     public partial class GamePage : ContentPage
     {
         private int _letters = 5;
         private int _chances = 8;
+        private string _word;
 
         public string Letters
         {
@@ -17,10 +19,17 @@
             set { if (int.TryParse(value, out var v)) _chances = v; ApplySettings(); }
         }
 
+        public string Word
+        {
+            set { _word = value; ApplySettings(); }
+        }
+
         private void ApplySettings()
         {
             wordBoard.WordLength = _letters;
             wordBoard.RetriesCount = _chances;
+            if (!string.IsNullOrEmpty(_word))
+                wordBoard.Word = _word;
         }
 
         public GamePage()

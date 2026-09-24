@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Word500.HelpPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource White}">
+
+    <ScrollView Padding="24,40">
+        <VerticalStackLayout MaximumWidthRequest="480" HorizontalOptions="Center" Spacing="0">
+
+            <!-- Header -->
+            <Border WidthRequest="72" HeightRequest="72"
+                    StrokeThickness="0" HorizontalOptions="Center"
+                    Margin="0,0,0,16" BackgroundColor="#DBEEFE">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Image Source="icon_help.png" WidthRequest="40" HeightRequest="40"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Label Text="How to Play"
+                   FontSize="28" FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Tertiary}"
+                   Margin="0,0,0,8" />
+            <Label Text="Master the art of deduction"
+                   FontSize="14" HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Gray400}"
+                   Margin="0,0,0,32" />
+
+            <!-- Section 1: The Goal -->
+            <Label Text="THE GOAL" FontSize="12" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" Margin="0,0,0,8"
+                   CharacterSpacing="2" />
+            <Label FontSize="15" TextColor="{StaticResource Gray600}"
+                   LineHeight="1.5" Margin="0,0,0,24">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="A secret word is hiding. Your job is to figure it out before your chances run out. Type a word, hit " />
+                        <Span Text="Submit" FontAttributes="Bold" TextColor="{StaticResource Gray900}" />
+                        <Span Text=", and the game tells you how close you are." />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <!-- Section 2: Scoring — with colored tiles -->
+            <Label Text="READING THE SCORE" FontSize="12" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" Margin="0,0,0,12"
+                   CharacterSpacing="2" />
+
+            <!-- Green -->
+            <Border Stroke="Transparent" StrokeThickness="0"
+                    BackgroundColor="#F0FDF4" Padding="16,14"
+                    HorizontalOptions="Fill" Margin="0,0,0,8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="44,*" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="44" HeightRequest="44"
+                            StrokeThickness="0" BackgroundColor="Green">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Label Text="3" FontSize="20" FontAttributes="Bold"
+                               TextColor="White" HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="Green — Direct Hits"
+                               FontSize="15" FontAttributes="Bold" TextColor="#16A34A" />
+                        <Label Text="These letters are in the word AND in the correct position."
+                               FontSize="13" TextColor="{StaticResource Gray500}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Yellow -->
+            <Border Stroke="Transparent" StrokeThickness="0"
+                    BackgroundColor="#FEFCE8" Padding="16,14"
+                    HorizontalOptions="Fill" Margin="0,0,0,8">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="44,*" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="44" HeightRequest="44"
+                            StrokeThickness="0" BackgroundColor="Gold">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Label Text="1" FontSize="20" FontAttributes="Bold"
+                               TextColor="White" HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="Yellow — Right Letter, Wrong Spot"
+                               FontSize="15" FontAttributes="Bold" TextColor="#CA8A04" />
+                        <Label Text="The letter exists in the word but isn't in this position."
+                               FontSize="13" TextColor="{StaticResource Gray500}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Red -->
+            <Border Stroke="Transparent" StrokeThickness="0"
+                    BackgroundColor="#FEF2F2" Padding="16,14"
+                    HorizontalOptions="Fill" Margin="0,0,0,24">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="44,*" ColumnSpacing="14">
+                    <Border Grid.Column="0" WidthRequest="44" HeightRequest="44"
+                            StrokeThickness="0" BackgroundColor="Red">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Label Text="1" FontSize="20" FontAttributes="Bold"
+                               TextColor="White" HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="Red — Not in the Word"
+                               FontSize="15" FontAttributes="Bold" TextColor="#DC2626" />
+                        <Label Text="These letters don't appear anywhere in the hidden word."
+                               FontSize="13" TextColor="{StaticResource Gray500}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Section 3: Tile Marking -->
+            <Label Text="MARKING TILES" FontSize="12" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" Margin="0,0,0,8"
+                   CharacterSpacing="2" />
+            <Label FontSize="15" TextColor="{StaticResource Gray600}"
+                   LineHeight="1.5" Margin="0,0,0,6">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Tap any letter tile to cycle through colors and " />
+                        <Span Text="mark your assumptions" FontAttributes="Bold" TextColor="{StaticResource Gray900}" />
+                        <Span Text=" about where a letter belongs. This is just for your own tracking — it doesn't affect the game." />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <!-- Mini tile demo -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="6" Margin="0,8,0,24">
+                <Border WidthRequest="38" HeightRequest="38" StrokeThickness="1"
+                        Stroke="{StaticResource Gray200}" BackgroundColor="Transparent">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="6" /></Border.StrokeShape>
+                    <Label Text="A" FontSize="16" FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="{StaticResource Gray600}" />
+                </Border>
+                <Label Text="&#x2192;" FontSize="18" VerticalOptions="Center"
+                       TextColor="{StaticResource Gray300}" />
+                <Border WidthRequest="38" HeightRequest="38" StrokeThickness="0"
+                        BackgroundColor="Red">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="6" /></Border.StrokeShape>
+                    <Label Text="A" FontSize="16" FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="White" />
+                </Border>
+                <Label Text="&#x2192;" FontSize="18" VerticalOptions="Center"
+                       TextColor="{StaticResource Gray300}" />
+                <Border WidthRequest="38" HeightRequest="38" StrokeThickness="0"
+                        BackgroundColor="Gold">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="6" /></Border.StrokeShape>
+                    <Label Text="A" FontSize="16" FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="White" />
+                </Border>
+                <Label Text="&#x2192;" FontSize="18" VerticalOptions="Center"
+                       TextColor="{StaticResource Gray300}" />
+                <Border WidthRequest="38" HeightRequest="38" StrokeThickness="0"
+                        BackgroundColor="Green">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="6" /></Border.StrokeShape>
+                    <Label Text="A" FontSize="16" FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           TextColor="White" />
+                </Border>
+            </HorizontalStackLayout>
+
+            <!-- Section 4: Tools -->
+            <Label Text="YOUR TOOLS" FontSize="12" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" Margin="0,0,0,12"
+                   CharacterSpacing="2" />
+
+            <!-- Submit -->
+            <Grid ColumnDefinitions="40,*" ColumnSpacing="12" Margin="0,0,0,14">
+                <Border Grid.Column="0" WidthRequest="40" HeightRequest="40"
+                        StrokeThickness="1" Stroke="{StaticResource Gray200}"
+                        BackgroundColor="{StaticResource White}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="8" /></Border.StrokeShape>
+                    <Image Source="submit_icon.png" WidthRequest="22" HeightRequest="22"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                    <Label Text="Submit" FontSize="15" FontAttributes="Bold"
+                           TextColor="{StaticResource Gray900}" />
+                    <Label Text="Check your word against the hidden word. Hold to force submit a partial word."
+                           FontSize="13" TextColor="{StaticResource Gray500}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Clear / Reset -->
+            <Grid ColumnDefinitions="40,*" ColumnSpacing="12" Margin="0,0,0,14">
+                <Border Grid.Column="0" WidthRequest="40" HeightRequest="40"
+                        StrokeThickness="1" Stroke="{StaticResource Gray200}"
+                        BackgroundColor="{StaticResource White}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="8" /></Border.StrokeShape>
+                    <Image Source="clear.png" WidthRequest="22" HeightRequest="22"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                    <Label Text="Reset" FontSize="15" FontAttributes="Bold"
+                           TextColor="{StaticResource Gray900}" />
+                    <Label Text="Tap to reset your tile color predictions. Hold to clear all tested rows."
+                           FontSize="13" TextColor="{StaticResource Gray500}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Backspace -->
+            <Grid ColumnDefinitions="40,*" ColumnSpacing="12" Margin="0,0,0,14">
+                <Border Grid.Column="0" WidthRequest="40" HeightRequest="40"
+                        StrokeThickness="1" Stroke="{StaticResource Gray200}"
+                        BackgroundColor="{StaticResource White}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="8" /></Border.StrokeShape>
+                    <Image Source="backspace_icon.png" WidthRequest="22" HeightRequest="22"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                    <Label Text="Backspace" FontSize="15" FontAttributes="Bold"
+                           TextColor="{StaticResource Gray900}" />
+                    <Label Text="Delete the last letter. Hold to clear the entire line."
+                           FontSize="13" TextColor="{StaticResource Gray500}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Squible -->
+            <Grid ColumnDefinitions="40,*" ColumnSpacing="12" Margin="0,0,0,24">
+                <Border Grid.Column="0" WidthRequest="40" HeightRequest="40"
+                        StrokeThickness="1" Stroke="{StaticResource Gray200}"
+                        BackgroundColor="{StaticResource White}">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="8" /></Border.StrokeShape>
+                    <Image Source="squible.png" WidthRequest="22" HeightRequest="22"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                    <Label Text="Squible" FontSize="15" FontAttributes="Bold"
+                           TextColor="{StaticResource Gray900}" />
+                    <Label Text="Tap to get a hint — shuffles your letters and finds real words containing them. Hold for a strict hint that keeps letters in their exact positions."
+                           FontSize="13" TextColor="{StaticResource Gray500}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Section 5: Spacebar tip -->
+            <Label Text="TIPS" FontSize="12" FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}" Margin="0,0,0,8"
+                   CharacterSpacing="2" />
+            <Label FontSize="15" TextColor="{StaticResource Gray600}"
+                   LineHeight="1.5" Margin="0,0,0,24">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Press the " />
+                        <Span Text="spacebar" FontAttributes="Bold" TextColor="{StaticResource Gray900}" />
+                        <Span Text=" to insert a blank placeholder. This helps you visualize letter positions while working out the word." />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <!-- Footer -->
+            <BoxView HeightRequest="2" WidthRequest="40"
+                     Color="{StaticResource Primary}" Opacity="0.3"
+                     HorizontalOptions="Center" CornerRadius="1"
+                     Margin="0,0,0,12" />
+            <Label Text="Guess the word before your chances run out. Good luck!"
+                   FontSize="16" FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{StaticResource Tertiary}"
+                   Margin="0,0,0,40" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
