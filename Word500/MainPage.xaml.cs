@@ -27,10 +27,17 @@
                 }
                 else if (e.Function == FunctionKey.KeyFunction.Submit)
                 {
+                    wordBoard.EvaluateCurrent();
                 }
                 else if (e.Key.Length == 1)
                     wordBoard.appendLetter(e.Key[0]);
+
+
             };
+            // var words = Dictionary.GetWords()
+
+            wordBoard.Word = "orbit";
+            wordBoard.RetriesCount = 6;
         }
     }
 }

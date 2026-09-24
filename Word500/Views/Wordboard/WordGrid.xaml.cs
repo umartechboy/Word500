@@ -23,6 +23,10 @@ public partial class WordGrid : ContentView
         }
 
     }
+
+    string _word;
+    public string Word { get => _word; set { _word = value; WordLength = value.Length; } }
+
     void resetViews()
     {
         wordRows = new WordRow[RetriesCount];
@@ -48,8 +52,34 @@ public partial class WordGrid : ContentView
 	{
     }
     int currentRow = 0;
+    int currentLetter = 0;
     public void appendLetter(char chr)
     {
-        wordRows[currentRow].appendLetter(chr);
+        if (chr == '\b')
+        {
+            if (currentLetter <= 0)
+                return;
+            currentLetter--;
+            wordRows[currentRow].setLetter(chr, currentLetter);
+            return;
+        }
+        if (currentLetter >= WordLength)
+        {
+            return;
+        }
+        wordRows[currentRow].setLetter(chr, currentLetter);
+        currentLetter++;
+    }
+
+    int countCorrect(string user, correct)
+    {
+
+    }
+    internal void EvaluateCurrent()
+    {
+        if (currentLetter < WordLength - 1) 
+        {
+            wordRows[currentRow].shakeNo();
+        }
     }
 }

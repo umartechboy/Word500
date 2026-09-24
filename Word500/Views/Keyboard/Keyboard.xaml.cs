@@ -25,6 +25,7 @@ public partial class Keyboard : ContentView
         lRowGrid.Children.Add(row4);
 
 		bBackspace.KeyPressed += (s,e) => KeyPressed?.Invoke(s, e);
-
+		bSubmit.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
+		bClear.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
     }
 }

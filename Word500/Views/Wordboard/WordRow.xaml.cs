@@ -12,7 +12,6 @@ public partial class WordRow : ContentView
         this.Margin = new Thickness(0, 0, 0, 3);
         InitializeComponent();
         letterTiles = new LetterTile[wordCount];
-        scoreTiles = new LetterTile[3];
         int totalTiles = wordCount + 3;
 
         for (int i = 0; i < totalTiles; i++)
@@ -25,32 +24,27 @@ public partial class WordRow : ContentView
             letterTiles[i].Margin = new Thickness(0, 0, this.Margin.Bottom, 0);
             tileGrid.Add(letterTiles[i], i, 0);
         }
+        scoreTiles = new LetterTile[3];
         for (int i = 0; i < scoreTiles.Length; i++)
         {
             scoreTiles[i] = new LetterTile { DisableClick = true, HorizontalOptions = LayoutOptions.Fill };
             scoreTiles[i].SizeChanged += OnTileSizeChanged;
             scoreTiles[i].Margin = new Thickness(this.Margin.Bottom, 0, 0, 0);
+            scoreTiles[i].MarkState = (LetterTile.MarkStates)(3 - i);
             tileGrid.Add(scoreTiles[i], wordCount + i, 0);
         }
     }
 
-    int currentLetter = 0;
-    public void appendLetter(char chr)
+    public void setLetter(char chr, int currentLetter)
     {
-        if (chr == '\b')
-        {
-            if (currentLetter <= 0)
-                return;
-            currentLetter--;
-            letterTiles[currentLetter].Label = "";
-            return;
-        }
-        if (currentLetter >= letterTiles.Length)
-        {
-            return;
-        }
         letterTiles[currentLetter].Label = chr.ToString();
-        currentLetter++;
+    }
+    public void shakeNo()
+    {
+        foreach (var letterTile in letterTiles) 
+        {
+            letterTile.shakeNo();
+        }
     }
     private void OnTileSizeChanged(object? sender, EventArgs e)
     {

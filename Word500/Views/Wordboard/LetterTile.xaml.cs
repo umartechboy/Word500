@@ -78,7 +78,25 @@ public partial class LetterTile : ContentView
 			// handled in timer
 		}
 	}
-	public double Size
+
+	internal void shakeNo()
+	{
+        tileBorder.TranslateToAsync(5, 0, 50).ContinueWith((b) =>
+        {
+            tileBorder.TranslateToAsync(-5, 0, 350).ContinueWith((b) =>
+            {
+                tileBorder.TranslateToAsync(5, 0, 50).ContinueWith((b) =>
+                {
+                    tileBorder.TranslateToAsync(-5, 0, 50).ContinueWith((b) =>
+                    {
+                        tileBorder.TranslateToAsync(0, 0, 50);
+                    });
+                });
+            });
+        });
+	}
+
+    public double Size
 	{
 		get { return tileBorder.WidthRequest; }
 		set { tileBorder.HeightRequest = tileBorder.WidthRequest = value > 5 ? value : 5; }
