@@ -30,6 +30,12 @@
             wordBoard.RetriesCount = _chances;
             if (!string.IsNullOrEmpty(_word))
                 wordBoard.Word = _word;
+            else
+            {
+                var candidates = Dictionary.GetWords().Where(w => w.Length == _letters).ToArray();
+                if (candidates.Length > 0)
+                    wordBoard.Word = candidates[new Random().Next(candidates.Length)];
+            }
         }
 
         public GamePage()

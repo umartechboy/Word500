@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Word500.Keyboard"
              xmlns:local="clr-namespace:Word500">
-    <VerticalStackLayout x:Name="lRowGrid" HorizontalOptions="Fill" VerticalOptions="Center"
-                         MaximumWidthRequest="600" Margin="20,0">
+    <VerticalStackLayout x:Name="lRowGrid" HorizontalOptions="Fill" VerticalOptions="Center">
         <Grid HorizontalOptions="Fill" ColumnDefinitions="*,*,*,*" Margin="0,8,0,8">
             <local:FunctionKey x:Name="bClear" Grid.Column="0" Margin="5,0" Function="Clear"></local:FunctionKey>
             <local:FunctionKey x:Name="bSubmit" Grid.Column="1" Margin="5,0" Function="Submit"></local:FunctionKey>
