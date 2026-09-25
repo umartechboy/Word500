@@ -20,7 +20,11 @@ public partial class LetterTile : ContentView
 				MarkStates.Green => Colors.Green,
 				_ => Colors.Transparent
 			};
-		}
+            if (value == MarkStates.Yellow)
+                label.TextColor = Colors.Black;
+            else
+                label.TextColor = Colors.White;
+        }
 	}
 	public event EventHandler? TestStateChanged;
 	public event EventHandler? Locked;
@@ -96,11 +100,6 @@ public partial class LetterTile : ContentView
         });
 	}
 
-    public double Size
-	{
-		get { return tileBorder.WidthRequest; }
-		set { tileBorder.HeightRequest = tileBorder.WidthRequest = value > 5 ? value : 5; }
-	}
 	public bool DisableClick { get; set; } = false;
 	public string Label { get { return label.Text; } set { label.Text = value; } }
 	public enum MarkStates : int

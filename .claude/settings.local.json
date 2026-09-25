@@ -10,7 +10,13 @@
       "Bash(git push *)",
       "Bash(gcloud run *)",
       "Bash(gcloud app *)",
-      "Bash(gcloud compute *)"
+      "Bash(gcloud compute *)",
+      "Bash(adb connect *)",
+      "Bash(where adb *)",
+      "Read(//c/Users/star/AppData/Local/Android/Sdk/platform-tools/**)",
+      "Read(//c/Program Files \\\\\\(x86\\\\\\)/Android/android-sdk/platform-tools/**)",
+      "Bash(C:/Program Files \\(x86\\)/Android/android-sdk/platform-tools/adb.exe connect *)",
+      "Bash(C:/Program Files \\(x86\\)/Android/android-sdk/platform-tools/adb.exe pair *)"
     ]
   }
 }

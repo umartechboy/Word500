@@ -4,9 +4,8 @@
              xmlns:local="clr-namespace:Word500"
              x:Class="Word500.GamePage">
 
-    <VerticalStackLayout x:Name="lWordGrid" HorizontalOptions="Fill" VerticalOptions="Center"
-                         MaximumWidthRequest="600" Margin="20,0">
-        <local:WordGrid WordLength="5" RetriesCount="8" x:Name="wordBoard"/>
+    <VerticalStackLayout x:Name="lWordGrid" HorizontalOptions="Center" VerticalOptions="Center">
+        <local:WordGrid WordLength="5" RetriesCount="8" x:Name="wordBoard" HorizontalOptions="Center" VerticalOptions="Center"/>
         <local:Keyboard x:Name="keyboard"/>
     </VerticalStackLayout>
 

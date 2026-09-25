@@ -29,7 +29,7 @@ public partial class KeyboardKey : ContentView
         {
             if (this.Window == null)
                 return;
-            this.WidthRequest = this.Window.Width / 13;
+            this.WidthRequest = this.Window.Width / 11;
             this.Window.SizeChanged += (s, e) => handler(s, e);
             if (this.Character == "\t")
                 this.WidthRequest /= 2;

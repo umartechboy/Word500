@@ -52,6 +52,24 @@ public partial class WordGrid : ContentView
             lWordGrid.Children.Add(wordRows[i]);
         }
     }
+    protected override void OnHandlerChanged()
+    {
+        if (this.Window == null)
+            return;
+        Window.SizeChanged += sizeChanged;
+        void sizeChanged (object s, EventArgs  e)
+        {
+            var margin = 20;
+            var sp = 8;
+            var screenUsage = 0.7;
+            double sizeByWidth = (this.Window.Width - margin * 2) / (Word.Length + 3) - sp;
+            double sizeByHeight = (this.Window.Height - margin * 2) * screenUsage / wordRows.Length - sp;
+            double size = Math.Min(sizeByWidth, sizeByHeight);
+            foreach (var row in wordRows)
+                row.TileSize = size;
+        };
+        sizeChanged(null, null);
+    }
     public WordGrid() : this(8)
     {
     }
@@ -184,6 +202,21 @@ public partial class WordGrid : ContentView
         {
             wordRows[currentRow].WordEntered = newWord;
             currentLetter = newWord.Length;
+        }
+    }
+
+    public async Task CollapseRemaining()
+    {
+        for (int i = 1; i< wordRows.Length; i++)
+        {
+            await wordRows[i].CollapseRemaining();
+        }
+    }
+    public async Task ScaleUpAll()
+    {
+        for (int i = 0; i < wordRows.Length; i++)
+        {
+            await wordRows[i].ScaleUpAll();
         }
     }
 }

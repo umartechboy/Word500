@@ -27,18 +27,20 @@ public partial class WordRow : ContentView
         for (int i = 0; i < letterTiles.Length; i++)
         {
             letterTiles[i] = new LetterTile { HorizontalOptions = LayoutOptions.Fill };
-            letterTiles[i].SizeChanged += OnTileSizeChanged;
             letterTiles[i].Margin = new Thickness(0, 0, this.Margin.Bottom, 0);
             letterTiles[i].TestStateChanged += (s, e) => TestStateChanged?.Invoke(s, e);
+            letterTiles[i].Scale = 0;
+            letterTiles[i].Opacity = 0;
             tileGrid.Add(letterTiles[i], i, 0);
         }
         scoreTiles = new LetterTile[3];
         for (int i = 0; i < scoreTiles.Length; i++)
         {
             scoreTiles[i] = new LetterTile { DisableClick = true, HorizontalOptions = LayoutOptions.Fill };
-            scoreTiles[i].SizeChanged += OnTileSizeChanged;
             scoreTiles[i].Margin = new Thickness(this.Margin.Bottom, 0, 0, 0);
             scoreTiles[i].TestState = (LetterTile.MarkStates)(3 - i);
+            scoreTiles[i].Scale = 0;
+            scoreTiles[i].Opacity = 0;
             tileGrid.Add(scoreTiles[i], wordCount + i, 0);
         }
     }
@@ -55,6 +57,17 @@ public partial class WordRow : ContentView
                 else
                     letterTiles[i].Label = "";
             }
+        }
+    }
+
+    public double TileSize
+    {
+        set
+        {
+            foreach (var tile in letterTiles)
+                tile.WidthRequest = tile.HeightRequest = value;
+            foreach (var tile in scoreTiles)
+                tile.WidthRequest = tile.HeightRequest = value;
         }
     }
 
@@ -82,19 +95,35 @@ public partial class WordRow : ContentView
         scoreTiles[2].Label = wrong.ToString();
     }
 
-    private void OnTileSizeChanged(object? sender, EventArgs e)
-    {
-        var tile = (LetterTile)sender!;
-        if (tile.Width > 0)
-            tile.HeightRequest = tile.Width;
-    }
-
     internal void MarkTestState(string label, LetterTile.MarkStates testState)
     {
         foreach(var tile in letterTiles)
         {
             if (tile.Label == label)
                 tile.TestState = testState;
+        }
+    }
+
+    public async Task CollapseRemaining()
+    {
+        var allTiles = new List<LetterTile>();
+        allTiles.AddRange(letterTiles);
+        allTiles.AddRange(scoreTiles);
+        foreach(var tile in allTiles)
+            await tile.FadeToAsync(0.1, 30);
+    }
+
+    public async Task ScaleUpAll()
+    {
+        var allTiles = new List<LetterTile>();
+        allTiles.AddRange(letterTiles);
+        allTiles.AddRange(scoreTiles);
+        foreach (var tile in allTiles)
+        {
+            tile.FadeTo(1, 300);
+            tile.ScaleToAsync(1.2, 300);
+            tile.ScaleToAsync(1, 100);
+            await Task.Delay(30);
         }
     }
 }
