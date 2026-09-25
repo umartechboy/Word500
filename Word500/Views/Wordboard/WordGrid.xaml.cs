@@ -43,6 +43,16 @@ public partial class WordGrid : ContentView
             wordRows[i].TestStateChanged += (s, e) => TestStateChanged?.Invoke(s, e);
             lWordGrid.Children.Add(wordRows[i]);
         }
+
+        var margin = 20;
+        var sp = 8;
+        var screenUsage = 0.7;
+        double sizeByWidth = (this.Window.Width - margin * 2) / (Word.Length + 3) - sp;
+        double sizeByHeight = (this.Window.Height - margin * 2) * screenUsage / wordRows.Length - sp;
+        double size = Math.Min(sizeByWidth, sizeByHeight);
+
+        foreach (var row in wordRows)
+            row.TileSize = size;
     }
     WordRow[] wordRows;
     public WordGrid(int wordCount)
@@ -54,30 +64,6 @@ public partial class WordGrid : ContentView
             wordRows[i] = new WordRow();
             lWordGrid.Children.Add(wordRows[i]);
         }
-    }
-    double lastCalcOn = -1;
-    protected override void OnHandlerChanged()
-    {
-        if (this.Window == null)
-            return;
-        Window.SizeChanged += sizeChanged;
-        void sizeChanged (object s, EventArgs  e)
-        {
-            if (lastCalcOn == this.Window.Width)
-                return;
-            lastCalcOn = this.Window.Width;
-            Window.SizeChanged -= sizeChanged;
-            var margin = 20;
-            var sp = 8;
-            var screenUsage = 0.7;
-            double sizeByWidth = (this.Window.Width - margin * 2) / (Word.Length + 3) - sp;
-            double sizeByHeight = (this.Window.Height - margin * 2) * screenUsage / wordRows.Length - sp;
-            double size = Math.Min(sizeByWidth, sizeByHeight);
-
-            foreach (var row in wordRows)
-                row.TileSize = size;
-        };
-        sizeChanged(null, null);
     }
     public WordGrid() : this(8)
     {

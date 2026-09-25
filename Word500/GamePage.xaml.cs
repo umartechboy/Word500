@@ -38,11 +38,6 @@
             }
         }
 
-        protected override void OnHandlerChanging(HandlerChangingEventArgs args)
-        {
-            wordBoard.ResetViews();
-            keyboard.ResetViews();
-        }
         public GamePage()
         {
             InitializeComponent();
@@ -103,12 +98,25 @@
 
             };
         }
+        protected override void OnHandlerChanging(HandlerChangingEventArgs args)
+        {
+        }
         protected override void OnHandlerChanged()
         {
             if (this.Window != null)
             {
+                //wordBoard.ResetViews();
+                keyboard.ResetViews();
+                new Task(async () =>
+                {
+                    await Task.Delay(100);
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        wordBoard.ResetViews();
+                        wordBoard.ScaleUpAll();
+                    });
+                }).Start();
                 //wordBoard.CollapseRemaining();
-                wordBoard.ScaleUpAll();
                 //wordBoard.MaximumHeightRequest = this.Window.Height * 0.7;
             }
         }
