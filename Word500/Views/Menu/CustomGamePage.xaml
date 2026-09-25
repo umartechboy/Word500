@@ -120,6 +120,7 @@
                                        FontSize="18"
                                        HorizontalTextAlignment="Center"
                                        TextTransform="Uppercase"
+                                       TextColor="Black"
                                        CharacterSpacing="4"
                                        MaxLength="8"
                                        Keyboard="Text"
