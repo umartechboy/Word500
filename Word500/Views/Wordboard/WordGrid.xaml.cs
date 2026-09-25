@@ -1,18 +1,19 @@
 using System.Runtime.Serialization;
-
 namespace Word500;
 
 public partial class WordGrid : ContentView
 {
-    int _retriesCount = 8;
-    int _wordLength = 5;
+    int _retriesCount = 0;
+    int _wordLength = 0;
     public int WordLength
     {
         get => _wordLength;
         set
         {
+            if (_wordLength == value)
+                return;
             _wordLength = value;
-            resetViews();
+            //resetViews();
         }
     }
     public int RetriesCount
@@ -20,8 +21,10 @@ public partial class WordGrid : ContentView
         get => _retriesCount;
         set
         {
+            if (_retriesCount == value)
+                return;
             _retriesCount = value;
-            resetViews();
+            //resetViews();
         }
 
     }
@@ -30,7 +33,7 @@ public partial class WordGrid : ContentView
     public string Word { get => _word; set { _word = value.ToUpper(); WordLength = value.Length; } }
     public string UserWord { get { return wordRows[currentRow].WordEntered; } }
     public event EventHandler TestStateChanged;
-    void resetViews()
+    public void ResetViews()
     {
         wordRows = new WordRow[RetriesCount];
         lWordGrid.Children.Clear();
@@ -52,6 +55,7 @@ public partial class WordGrid : ContentView
             lWordGrid.Children.Add(wordRows[i]);
         }
     }
+    double lastCalcOn = -1;
     protected override void OnHandlerChanged()
     {
         if (this.Window == null)
@@ -59,12 +63,17 @@ public partial class WordGrid : ContentView
         Window.SizeChanged += sizeChanged;
         void sizeChanged (object s, EventArgs  e)
         {
+            if (lastCalcOn == this.Window.Width)
+                return;
+            lastCalcOn = this.Window.Width;
+            Window.SizeChanged -= sizeChanged;
             var margin = 20;
             var sp = 8;
             var screenUsage = 0.7;
             double sizeByWidth = (this.Window.Width - margin * 2) / (Word.Length + 3) - sp;
             double sizeByHeight = (this.Window.Height - margin * 2) * screenUsage / wordRows.Length - sp;
             double size = Math.Min(sizeByWidth, sizeByHeight);
+
             foreach (var row in wordRows)
                 row.TileSize = size;
         };

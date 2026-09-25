@@ -38,6 +38,11 @@
             }
         }
 
+        protected override void OnHandlerChanging(HandlerChangingEventArgs args)
+        {
+            wordBoard.ResetViews();
+            keyboard.ResetViews();
+        }
         public GamePage()
         {
             InitializeComponent();
@@ -104,7 +109,7 @@
             {
                 //wordBoard.CollapseRemaining();
                 wordBoard.ScaleUpAll();
-                wordBoard.MaximumHeightRequest = this.Window.Height * 0.7;
+                //wordBoard.MaximumHeightRequest = this.Window.Height * 0.7;
             }
         }
         private void WordBoard_TestStateChanged(object? sender, EventArgs e)

@@ -7,14 +7,17 @@ namespace Word500;
 public partial class KeyboardRow : ContentView
 {
     public event KeyPressedHandler KeyPressed;
+    List <KeyboardKey> allKeys;
     public KeyboardRow(string keys)
     {
         InitializeComponent();
+        allKeys = new List<KeyboardKey>();
         for (int i = 0; i < keys.Length; i++)
         {
             var keyView = new KeyboardKey(keys[i].ToString()) { HorizontalOptions = LayoutOptions.Fill };
             keyView.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
             row.Children.Add(keyView);
+            allKeys.Add(keyView);
         }
     }
     public KeyboardKey this[char chr] 
@@ -32,4 +35,12 @@ public partial class KeyboardRow : ContentView
     public KeyboardRow():this(" ")
 	{
 	}
+
+    internal void ResetViews()
+    {
+        foreach (var key in allKeys)
+        {
+            key.ResetViews();
+        }
+    }
 }

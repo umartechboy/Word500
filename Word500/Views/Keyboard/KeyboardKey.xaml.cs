@@ -23,21 +23,16 @@ public partial class KeyboardKey : ContentView
         Character = chr;
     }
     public event KeyPressedHandler KeyPressed;
-    protected override void OnHandlerChanged()
+    public void ResetViews()
     {
-        void handler(object s, object e)
-        {
-            if (this.Window == null)
-                return;
-            this.WidthRequest = this.Window.Width / 11;
-            this.Window.SizeChanged += (s, e) => handler(s, e);
-            if (this.Character == "\t")
-                this.WidthRequest /= 2;
-            this.HeightRequest = this.WidthRequest;
-            if (this.Character == " ")
-                this.WidthRequest *= 5;
-        }
-        handler(null, null);
+        if (this.Window == null)
+            return;
+        this.WidthRequest = this.Window.Width / 11;
+        if (this.Character == "\t")
+            this.WidthRequest /= 2;
+        this.HeightRequest = this.WidthRequest;
+        if (this.Character == " ")
+            this.WidthRequest *= 5;
     }
     public KeyboardKey():this(" ")
     {

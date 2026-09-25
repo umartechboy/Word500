@@ -31,7 +31,21 @@ public partial class Keyboard : ContentView
 		bClear.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
 		bSquibler.KeyPressed += (s, e) => KeyPressed?.Invoke(s, e);
     }
-	public KeyboardKey this[char chr]
+	public void ResetViews()
+	{
+		if (Window == null)
+			return;
+
+		foreach (var row in rows)
+			row.ResetViews();
+
+        bBackspace.ResetViews();
+        bSubmit.ResetViews();
+        bClear.ResetViews();
+		bSquibler.ResetViews();
+    }
+
+    public KeyboardKey this[char chr]
 	{
 		get
 		{

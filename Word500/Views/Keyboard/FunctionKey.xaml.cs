@@ -41,15 +41,11 @@ public partial class FunctionKey : ContentView
         Function = _function;
     }
     public event KeyPressedHandler KeyPressed;
-    protected override void OnHandlerChanged()
+    public void ResetViews()
     {
-        void handler(object s, object e)
-        {
-            if (this.Window == null)
-                return;
-            this.HeightRequest = this.Window.Width / 13;
-        }
-        handler(null, null);
+        if (this.Window == null)
+            return;
+        this.HeightRequest = this.Window.Width / 13;
     }
     private DateTime pressStart;
     private static readonly TimeSpan HoldThreshold = TimeSpan.FromSeconds(0.7);
