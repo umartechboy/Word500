@@ -121,33 +121,60 @@ public partial class WordGrid : ContentView
     {
         return correct.Length - countCorrect(user, correct) - countPresent(user, correct);
     }
-    internal void EvaluateCurrent(bool ignoreSpelling = false)
+    public async Task EvaluateCurrent(bool ignoreSpelling = false)
     {
-        for (int i = 0; i < currentRow; i++)
+        if (currentRow == wordRows.Length - 1) // FInal
         {
-            if (wordRows[i].WordEntered == wordRows[currentRow].WordEntered) // cant waste the word again
+            if (Word == UserWord)
             {
-                wordRows[i].shakeNo();
+                wordRows.Last().Jump();
+                Task.Delay(200);
+                wordRows.Last().MarkEvaluation(5, 0, 0);
+            }
+            else
+            {
+                wordRows.Last().shakeNo();
+                
+                // add one more row and show the correct.
+                var correct = new WordRow(WordLength);
+                correct.TileSize = wordRows.Last().TileSize + 5;
+                await correct.ScaleUpAll();
+                correct.WordEntered = Word;
+                correct.MarkEvaluation(5, 0, 0);
+                lWordGrid.Children.Add(new WordRow(WordLength));
+                lWordGrid.Children.Add(correct);
+                correct.Jump();
+                currentRow++;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < currentRow; i++)
+            {
+                if (wordRows[i].WordEntered == wordRows[currentRow].WordEntered) // cant waste the word again
+                {
+                    wordRows[i].shakeNo();
+                    wordRows[currentRow].shakeNo();
+                    return;
+                }
+            }
+            if (currentLetter < WordLength - 1 || (!Dictionary.GetWords().Contains(UserWord) && !ignoreSpelling))
+            {
                 wordRows[currentRow].shakeNo();
                 return;
             }
+            else
+            { // we have a complete dictionary word. 
+                wordRows[currentRow].MarkEvaluation(countCorrect(UserWord, Word), countPresent(UserWord, Word), countWrong(UserWord, Word));
+            }
+            if (countWrong(UserWord, Word) == Word.Length)
+            {
+                foreach (var c in UserWord)
+                    MarkTestState(c.ToString(), LetterTile.MarkStates.Red);
+            }
+            currentRow++;
+            currentLetter = 0;
         }
-        if (currentLetter < WordLength - 1 || (!Dictionary.GetWords().Contains(UserWord) && !ignoreSpelling))
-        {
-            wordRows[currentRow].shakeNo();
-            return;
-        }
-        else
-        { // we have a complete dictionary word. 
-            wordRows[currentRow].MarkEvaluation(countCorrect(UserWord, Word), countPresent(UserWord, Word), countWrong(UserWord, Word));
-        }
-        if (countWrong(UserWord, Word) == Word.Length)
-        {
-            foreach (var c in UserWord)
-                MarkTestState(c.ToString(), LetterTile.MarkStates.Red);
-        }
-        currentRow++;
-        currentLetter = 0;
     }
 
     internal void MarkTestState(string label, LetterTile.MarkStates testState)

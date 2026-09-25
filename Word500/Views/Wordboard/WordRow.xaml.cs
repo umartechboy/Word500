@@ -60,6 +60,7 @@ public partial class WordRow : ContentView
         }
     }
 
+    double _tileSize = -1;
     public double TileSize
     {
         set
@@ -68,7 +69,9 @@ public partial class WordRow : ContentView
                 tile.WidthRequest = tile.HeightRequest = value;
             foreach (var tile in scoreTiles)
                 tile.WidthRequest = tile.HeightRequest = value;
+            _tileSize = value;
         }
+        get => _tileSize;
     }
 
     public void setLetter(char chr, int currentLetter)
@@ -120,9 +123,21 @@ public partial class WordRow : ContentView
         allTiles.AddRange(scoreTiles);
         foreach (var tile in allTiles)
         {
-            tile.FadeTo(1, 300);
+            tile.FadeToAsync(1, 300);
             tile.ScaleToAsync(1.2, 300);
             tile.ScaleToAsync(1, 100);
+            await Task.Delay(30);
+        }
+    }
+
+    public async Task Jump()
+    {
+        var allTiles = new List<LetterTile>();
+        allTiles.AddRange(letterTiles);
+        allTiles.AddRange(scoreTiles);
+        foreach (var tile in allTiles)
+        {
+            tile.TranslateToAsync(0, 10, 50).ContinueWith((a) => tile.TranslateToAsync(0, -10, 120).ContinueWith((b) => tile.TranslateToAsync(0, 0, 50)));
             await Task.Delay(30);
         }
     }

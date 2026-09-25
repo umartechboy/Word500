@@ -98,14 +98,10 @@
 
             };
         }
-        protected override void OnHandlerChanging(HandlerChangingEventArgs args)
-        {
-        }
         protected override void OnHandlerChanged()
         {
             if (this.Window != null)
             {
-                //wordBoard.ResetViews();
                 keyboard.ResetViews();
                 new Task(async () =>
                 {
@@ -116,8 +112,6 @@
                         wordBoard.ScaleUpAll();
                     });
                 }).Start();
-                //wordBoard.CollapseRemaining();
-                //wordBoard.MaximumHeightRequest = this.Window.Height * 0.7;
             }
         }
         private void WordBoard_TestStateChanged(object? sender, EventArgs e)
